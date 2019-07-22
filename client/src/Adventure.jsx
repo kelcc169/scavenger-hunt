@@ -1,33 +1,52 @@
 import React from 'react';
-
+import axios from 'axios';
 
 //creating an adventure
 class Adventure extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			//WHAT GOES IN STATE?
+			listId: '5d363131a98031c5a4fee07b',
+			listName: '',
+			locations: [],
+			currentLoc: '',
+			locName: '',
+			locLat: '',
+			locLong: '',
+			pictureUrl: '',
+			listIndex: 0
 		}
 	} 
+
+	componentDidMount() {
+		axios.get(`/api/lists/${this.state.listId}`)
+			.then(res => {
+				let list = res.data;
+				let locations = res.data.locations
+				this.setState({
+					listName: list.name,
+					locations,
+					locName: locations[0].name,
+					locLat: locations[0].latitude,
+					locLong: locations[0].longitude,
+					pictureUrl: locations[0].pictureUrl,
+					currentLoc: locations[0]._id
+				})
+			})
+	}
 
 	render () {
 		return (
 			<>
-			<h1>This is a test</h1> {''}{''}
-			<div class="map">
-				<p> MAP will go here-ish. </p>
-			</div>
-
-			
-
-
+				<h1>This is a test</h1> {''}{''}
+				<div className="map">
+					<p> MAP will go here-ish. </p>
+				</div>
+				<img src={this.state.pictureUrl} />
+				<button >I'm a button</button>
 			</>
-		);
-		
+		);	
 	}
-
-
-
 } 
 
 

@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import Login from './Login';
 import Signup from './Signup';
+import Adventure from './Adventure';
 import {
   BrowserRouter as Router,
   Route,
@@ -81,8 +82,7 @@ class App extends React.Component {
     if (user) {
       contents = (
         <>
-          <p>Hello, {user.name}</p>
-          <p onClick={this.logout}>Log out</p>
+          <Adventure />
         </>
       );
     } else {
