@@ -22,14 +22,13 @@ router.get('/locations', (req, res) => {
 
 // get one list from the api and all associated locations
 router.get('/lists/:id', (req, res) => {
-  List.findById(req.params.id, (err, list) => {
+  List.findById(req.params.id).populate('locations').exec( (err, list) => {
     if (err) res.json(err)
     res.json(list)
   })
 })
 
-
-// get one list from the api and all associated locations
+// get one location (FOR TESTING PURPOSES)
 router.get('/locations/:id', (req, res) => {
   Location.findById(req.params.id, (err, location) => {
     if (err) res.json(err)
@@ -41,7 +40,7 @@ router.get('/locations/:id', (req, res) => {
 router.post('/lists', (req, res) => {
   let newList = new List({
     name: req.body.name,
-    // createdBy: user.name
+    // createdBy: user._id
   })
   newList.save( (err,list) => {
     if (err) res.json(err)
@@ -66,7 +65,14 @@ router.post('/lists/:id/locations', (req, res) => {
         res.json(list)
       })
     })
+  })
+})
 
+// delete a list
+router.delete('/list/:id', (req, res) => {
+  List.findByIdAndDelete(req.params.id, (err) => {
+    if (err) res.json(err)
+    res.json('deleted the list!')
   })
 })
 
