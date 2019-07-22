@@ -6,8 +6,10 @@ import {
   BrowserRouter as Router,
   Route,
   Link
-}
-from 'react-router-dom';
+}from 'react-router-dom';
+
+import ImageUploader from './ImageUploader'
+import Image from 'cloudinary-react';
 
 class App extends React.Component {
   constructor(props) {
@@ -110,6 +112,7 @@ class App extends React.Component {
     return(
       <>
         {contents}
+        <ImageUploader/>
       </>
     );
   }
