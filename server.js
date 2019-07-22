@@ -25,6 +25,7 @@ const signupLimiter = new RateLimit({
   message: 'Maximum accounts created. Please try again later'
 });
 
+
 mongoose.connect('/mongodb://localhost/scavenger', {useNewUrlParser: true});
 const db = mongoose.connection;
 db.once('open', () => {

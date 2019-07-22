@@ -88,12 +88,24 @@ class App extends React.Component {
     } else {
       contents = (
         <>
-          <p>Please sign up or log in</p>
+          {/* <p>Please sign up or log in</p>
           <Login liftToken={this.liftToken} /><br />
-          <Signup liftToken={this.liftToken} />
+          <Signup liftToken={this.liftToken} /> */}
+          <Router>
+            <nav>
+              <Link to="/login">Login</Link>{" "}
+              <Link to="/signup">Signup</Link>
+            </nav>
+            <Route path="/login" render={() => <Login liftToken={this.liftToken}/>}/>
+            <Route path="/signup" render={() => <Signup liftToken={this.liftToken}/>} />
+            
+          
+          </Router>
+        
         </>
       )
     }
+    
 
     return(
       <>
