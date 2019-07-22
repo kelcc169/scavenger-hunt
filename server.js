@@ -25,7 +25,8 @@ const signupLimiter = new RateLimit({
   message: 'Maximum accounts created. Please try again later'
 });
 
-mongoose.connect('mongodb://localhost/scavenger', {useNewUrlParser: true});
+
+mongoose.connect('/mongodb://localhost/scavenger', {useNewUrlParser: true});
 const db = mongoose.connection;
 db.once('open', () => {
   console.log(`Connected to Mongo on ${db.host}:${db.port}`);
@@ -38,8 +39,10 @@ db.on('error', (err) => {
 // app.use('/auth/signup', signupLimiter);
 
 app.use('/auth', require('./routes/auth'));
-app.use('/api', expressJWT({secret: process.env.JWT_SECRET}), require('./routes/api'));
+app.use('/api', require('./routes/api'));
 
 app.listen(process.env.PORT, () => {
   console.log(`You're listening to port ${process.env.PORT}...`)
 });
+
+// expressJWT({secret: process.env.JWT_SECRET}),

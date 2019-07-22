@@ -1,7 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 import Login from './Login';
-import Signup from './Signup'
+import Signup from './Signup';
+import Adventure from './Adventure';
 import {
   BrowserRouter as Router,
   Route,
@@ -83,31 +84,27 @@ class App extends React.Component {
     if (user) {
       contents = (
         <>
-          <p>Hello, {user.name}</p>
-          <p onClick={this.logout}>Log out</p>
+          <Adventure />
         </>
       );
     } else {
       contents = (
         <>
-          {/* <p>Please sign up or log in</p>
-          <Login liftToken={this.liftToken} /><br />
-          <Signup liftToken={this.liftToken} /> */}
           <Router>
             <nav>
               <Link to="/login">Login</Link>{" "}
               <Link to="/signup">Signup</Link>
             </nav>
-            <Route path="/login" render={() => <Login liftToken={this.liftToken}/>}/>
-            <Route path="/signup" render={() => <Signup liftToken={this.liftToken}/>} />
-            
-          
+            <Route path="/login" 
+              render={() => <Login liftToken={this.liftToken}/>} 
+            />
+            <Route path="/signup" 
+              render={() => <Signup liftToken={this.liftToken}/>} 
+            />
           </Router>
-        
         </>
       )
     }
-    
 
     return(
       <>
