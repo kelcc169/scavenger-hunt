@@ -23,17 +23,25 @@ class Adventure extends React.Component {
 	handleButtonClick(e) {
 		e.preventDefault();
 		let listIndex = parseInt(this.state.listIndex);
-		let locations = this.state.locations;
-		console.log(locations, listIndex)
+		let listArr = this.state.locations
+		let location = locationsArr[listIndex];
 
-		if (!locations[listIndex]) {
+		if (listIndex < listArr.length) {
 			this.setState({
-				listIndex: 0
+				locName: location.name,
+				locLat: location.latitude,
+				locLong: location.longitude,
+				pictureUrl: location.pictureUrl,
+				listIndex: listIndex + 1
 			})
 		} else {
+			// you win!
 			this.setState({
-				pictureUrl: locations[listIndex].pictureUrl,
-				listIndex: listIndex + 1
+				locName: listArr[0].name,
+				locLat: listArr[0].latitude,
+				locLong: listArr[0].longitude,
+				pictureUrl: listArr[0].pictureUrl,
+				listIndex: 1
 			})
 		}
 	}
@@ -63,7 +71,7 @@ class Adventure extends React.Component {
 	render () {
 		return (
 			<>
-				<h1>This is a test</h1> {''}{''}
+				<h1>This is a test: Hello, {this.props.user.name} </h1> {''}{''}
 				<div className="map">
 					<p> MAP will go here-ish. </p>
 				</div>
