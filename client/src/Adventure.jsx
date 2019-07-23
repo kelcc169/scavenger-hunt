@@ -10,7 +10,6 @@ class Adventure extends React.Component {
 			listId: '5d3646a0bc74876ac1e5d32a',
 			listName: '',
 			locations: [],
-			currentLoc: '',
 			locName: '',
 			locLat: '',
 			locLong: '',
@@ -24,7 +23,7 @@ class Adventure extends React.Component {
 		e.preventDefault();
 		let listIndex = parseInt(this.state.listIndex);
 		let listArr = this.state.locations
-		let location = locationsArr[listIndex];
+		let location = listArr[listIndex];
 
 		if (listIndex < listArr.length) {
 			this.setState({
