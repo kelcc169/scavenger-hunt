@@ -6,7 +6,7 @@ class Adventure extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			listId: '5d363131a98031c5a4fee07b',
+			listId: '5d364b8df575bf2d92a2078d',
 			listName: '',
 			locations: [],
 			currentLoc: '',
@@ -42,7 +42,7 @@ class Adventure extends React.Component {
 				<div className="map">
 					<p> MAP will go here-ish. </p>
 				</div>
-				<img src={this.state.pictureUrl} />
+				<img style={{width:'100px', margin:'auto 0'}} src={this.state.pictureUrl} />
 				<button >I'm a button</button>
 			</>
 		);	
