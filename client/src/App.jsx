@@ -82,7 +82,7 @@ class App extends React.Component {
     if (user) {
       contents = (
         <>
-          <Adventure />
+          <Adventure user={user} />
         </>
       );
     } else {

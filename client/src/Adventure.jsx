@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import "./App.css";
+import './App.css';
 
 //creating an adventure
 class Adventure extends React.Component {
@@ -15,11 +15,43 @@ class Adventure extends React.Component {
 			locLat: '',
 			locLong: '',
 			pictureUrl: '',
-			listIndex: 0
+			listIndex: 1
 		}
+		this.handleButtonClick = this.handleButtonClick.bind(this)
 	} 
 
+	handleButtonClick(e) {
+		e.preventDefault();
+		let listIndex = parseInt(this.state.listIndex);
+		let listArr = this.state.locations
+		let location = locationsArr[listIndex];
+
+		if (listIndex < listArr.length) {
+			this.setState({
+				locName: location.name,
+				locLat: location.latitude,
+				locLong: location.longitude,
+				pictureUrl: location.pictureUrl,
+				listIndex: listIndex + 1
+			})
+		} else {
+			// you win!
+			this.setState({
+				locName: listArr[0].name,
+				locLat: listArr[0].latitude,
+				locLong: listArr[0].longitude,
+				pictureUrl: listArr[0].pictureUrl,
+				listIndex: 1
+			})
+		}
+	}
+
 	componentDidMount() {
+		//set state here for the selected list: 
+		//this.setState({
+			// listId: this.props.listId
+		// })
+
 		axios.get(`/api/lists/${this.state.listId}`)
 			.then(res => {
 				let list = res.data;
@@ -39,12 +71,12 @@ class Adventure extends React.Component {
 	render () {
 		return (
 			<>
-				<h1>This is a test</h1> {''}{''}
+				<h1>This is a test: Hello, {this.props.user.name} </h1> {''}{''}
 				<div className="map">
 					<p> MAP will go here-ish. </p>
 				</div>
-				<img src={this.state.pictureUrl} />
-				<button >I'm a button</button>
+				<img src={this.state.pictureUrl} alt='this is your target'/>
+				<button onClick={this.handleButtonClick} >I'm a button</button>
 			</>
 		);	
 	}
