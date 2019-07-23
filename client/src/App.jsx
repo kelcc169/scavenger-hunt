@@ -55,11 +55,12 @@ class App extends React.Component {
     }
   }
 
-  liftToken({token, user}) {
+  liftToken({token, user}, history) {
     this.setState({
       token,
       user
-    })
+    }, () => history.push('/'))
+
   }
 
   logout() {
@@ -81,27 +82,24 @@ class App extends React.Component {
     var contents;
     if (user) {
       contents = (
-        <>
-          <ImageUploader/>
+        <Router>
           <Profile user={user} />
-        </>
+        </Router>
       );
     } else {
       contents = (
-        <>
-          <Router>
-            <nav>
-              <Link className="brn-default" to="/login">Login</Link>{" "}
-              <Link className="brn-default"  to="/signup">Signup</Link>
-            </nav>
-            <Route path="/login" 
-              render={() => <Login liftToken={this.liftToken}/>} 
-            />
-            <Route path="/signup" 
-              render={() => <Signup liftToken={this.liftToken}/>} 
-            />
-          </Router>
-        </>
+        <Router>
+          <nav>
+            <Link className="brn-default" to="/login">Login</Link>{" "}
+            <Link className="brn-default"  to="/signup">Signup</Link>
+          </nav>
+          <Route path="/login" 
+            render={(props) => <Login liftToken={this.liftToken} {...props} />} 
+          />
+          <Route path="/signup" 
+            render={() => <Signup liftToken={this.liftToken}/>} 
+          />
+        </Router>
       )
     }
 

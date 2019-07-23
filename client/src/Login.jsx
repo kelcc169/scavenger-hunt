@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import {Link} from 'react-router-dom';
 
 class Login extends React.Component {
   constructor(props) {
@@ -31,7 +32,7 @@ class Login extends React.Component {
         })
       } else {
         localStorage.setItem('mernToken', res.data.token)
-        this.props.liftToken(res.data)
+        this.props.liftToken(res.data, this.props.history)
       }
     }).catch(err => {
       this.setState({
