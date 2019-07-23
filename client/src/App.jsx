@@ -3,12 +3,12 @@ import axios from 'axios';
 import Login from './Login';
 import Signup from './Signup';
 import Profile from './Profile';
+import ImageUploader from './ImageUploader'
 import {
   BrowserRouter as Router,
   Route,
   Link
-}
-from 'react-router-dom';
+}from 'react-router-dom';
 
 class App extends React.Component {
   constructor(props) {
@@ -82,6 +82,7 @@ class App extends React.Component {
     if (user) {
       contents = (
         <>
+          <ImageUploader/>
           <Profile user={user} />
         </>
       );
@@ -90,8 +91,8 @@ class App extends React.Component {
         <>
           <Router>
             <nav>
-              <Link to="/login">Login</Link>{" "}
-              <Link to="/signup">Signup</Link>
+              <Link className="brn-default" to="/login">Login</Link>{" "}
+              <Link className="brn-default"  to="/signup">Signup</Link>
             </nav>
             <Route path="/login" 
               render={() => <Login liftToken={this.liftToken}/>} 
@@ -106,7 +107,7 @@ class App extends React.Component {
 
     return(
       <>
-        {contents}
+        {contents} 
       </>
     );
   }
