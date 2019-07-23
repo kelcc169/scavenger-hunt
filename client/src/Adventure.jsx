@@ -2,15 +2,14 @@ import React from 'react';
 import axios from 'axios';
 import './App.css';
 
-//creating an adventure
+//going on an adventure
 class Adventure extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			listId: '5d364b8df575bf2d92a2078d',
+			listId: this.props.listId,
 			listName: '',
 			locations: [],
-			currentLoc: '',
 			locName: '',
 			locLat: '',
 			locLong: '',
@@ -23,27 +22,30 @@ class Adventure extends React.Component {
 	handleButtonClick(e) {
 		e.preventDefault();
 		let listIndex = parseInt(this.state.listIndex);
-		let locations = this.state.locations;
-		console.log(locations, listIndex)
+		let listArr = this.state.locations
+		let location = listArr[listIndex];
 
-		if (!locations[listIndex]) {
+		if (listIndex < listArr.length) {
 			this.setState({
-				listIndex: 0
+				locName: location.name,
+				locLat: location.latitude,
+				locLong: location.longitude,
+				pictureUrl: location.pictureUrl,
+				listIndex: listIndex + 1
 			})
 		} else {
+			// you win!
 			this.setState({
-				pictureUrl: locations[listIndex].pictureUrl,
-				listIndex: listIndex + 1
+				locName: listArr[0].name,
+				locLat: listArr[0].latitude,
+				locLong: listArr[0].longitude,
+				pictureUrl: listArr[0].pictureUrl,
+				listIndex: 1
 			})
 		}
 	}
 
 	componentDidMount() {
-		//set state here for the selected list: 
-		//this.setState({
-			// listId: this.props.listId
-		// })
-
 		axios.get(`/api/lists/${this.state.listId}`)
 			.then(res => {
 				let list = res.data;
@@ -63,33 +65,17 @@ class Adventure extends React.Component {
 	render () {
 		return (
 			<>
-			<div className="container">
-				<h1>This is a test</h1> {''}{''}
-				<div className="map">
-					<p> MAP will go here-ish. </p>
-				</div>
-				<div className="container">
-					<img src={this.state.pictureUrl} alt='this is your target'/>
-					<button className="btn btn-primary" onClick={this.handleButtonClick} >I'm a button</button>
-				</div>
-			</div>
+			  <div className="container">
+				  <h1>This is a test</h1> {''}{''}
+				  <div className="map">
+					  <p> MAP will go here-ish. </p>
+				  </div>
+				  <img src={this.state.pictureUrl} alt='this is your target'/>
+				  <button className="btn btn-primary" onClick={this.handleButtonClick} >I'm a button</button>
+			  </div>
 			</>
 		);	
 	}
 } 
-
-
-// Adventure has state.
-// CREATE ADVENTURE:
-// Ability to create a list by way of form, and title their scavenger hunt.
-// 1. Needs a target for the map to go
-// 2. Needs an image target for the specific scavenger spot
-// 3. Needs a button. The button needs to:
-//		- Take a picture
-//		- Send lat and long to state
-//
-//
-
-
 
 export default Adventure;
