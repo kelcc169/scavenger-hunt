@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import './App.css';
 
 //creating an adventure
 class Adventure extends React.Component {
@@ -14,11 +15,35 @@ class Adventure extends React.Component {
 			locLat: '',
 			locLong: '',
 			pictureUrl: '',
-			listIndex: 0
+			listIndex: 1
 		}
+		this.handleButtonClick = this.handleButtonClick.bind(this)
 	} 
 
+	handleButtonClick(e) {
+		e.preventDefault();
+		let listIndex = parseInt(this.state.listIndex);
+		let locations = this.state.locations;
+		console.log(locations, listIndex)
+
+		if (!locations[listIndex]) {
+			this.setState({
+				listIndex: 0
+			})
+		} else {
+			this.setState({
+				pictureUrl: locations[listIndex].pictureUrl,
+				listIndex: listIndex + 1
+			})
+		}
+	}
+
 	componentDidMount() {
+		//set state here for the selected list: 
+		//this.setState({
+			// listId: this.props.listId
+		// })
+
 		axios.get(`/api/lists/${this.state.listId}`)
 			.then(res => {
 				let list = res.data;
@@ -38,12 +63,16 @@ class Adventure extends React.Component {
 	render () {
 		return (
 			<>
+			<div className="container">
 				<h1>This is a test</h1> {''}{''}
 				<div className="map">
 					<p> MAP will go here-ish. </p>
 				</div>
-				<img style={{width:'100px', margin:'auto 0'}} src={this.state.pictureUrl} />
-				<button >I'm a button</button>
+				<div className="container">
+					<img src={this.state.pictureUrl} alt='this is your target'/>
+					<button className="btn btn-primary" onClick={this.handleButtonClick} >I'm a button</button>
+				</div>
+			</div>
 			</>
 		);	
 	}

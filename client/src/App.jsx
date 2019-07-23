@@ -8,9 +8,7 @@ import {
   Route,
   Link
 }from 'react-router-dom';
-
 import ImageUploader from './ImageUploader'
-import Image from 'cloudinary-react';
 
 class App extends React.Component {
   constructor(props) {
@@ -85,6 +83,7 @@ class App extends React.Component {
       contents = (
         <>
           <Adventure />
+          <ImageUploader/>
         </>
       );
     } else {
@@ -92,8 +91,8 @@ class App extends React.Component {
         <>
           <Router>
             <nav>
-              <Link to="/login">Login</Link>{" "}
-              <Link to="/signup">Signup</Link>
+              <Link className="brn-default" to="/login">Login</Link>{" "}
+              <Link className="brn-default"  to="/signup">Signup</Link>
             </nav>
             <Route path="/login" 
               render={() => <Login liftToken={this.liftToken}/>} 
@@ -109,7 +108,7 @@ class App extends React.Component {
     return(
       <>
         {contents}
-        <ImageUploader/>
+        
       </>
     );
   }

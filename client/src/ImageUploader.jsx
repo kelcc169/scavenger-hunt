@@ -10,13 +10,13 @@ class ImageUploader extends Component {
         })
     }
     fileUploadhandler = () => {
-
+        
     }
     render() {
         return (
-            <div>
-                <input type="file" onChange={this.ImageUploadhandler}/>
-                <button onClick={this.fileUploadhandler}>Upload</button>
+            <div className="container">
+                <input  type="file" onChange={this.ImageUploadhandler}/>
+                <button className="btn-success" onClick={this.fileUploadhandler}>Upload</button>
             </div>
         )
     }
