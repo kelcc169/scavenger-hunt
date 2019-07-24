@@ -65,9 +65,9 @@ class Adventure extends React.Component {
 	render () {
 		return (
 			<>
-				<h1>This is a test. </h1> {''}{''}
+				<h1>This is a test. </h1> 
 				<div className="map">
-					<p> MAP will go here-ish. </p>
+					<p> MAP will go here-ish as we call a component! </p>
 				</div>
 				<img src={this.state.pictureUrl} alt='goal'/>
 				<button onClick={this.handleButtonClick} >I'm a button</button>
