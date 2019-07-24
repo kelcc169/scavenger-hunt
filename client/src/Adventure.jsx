@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
+import Map from './Map';
 import './App.css';
-import './Map.jsx';
 
 //going on an adventure
 class Adventure extends React.Component {
@@ -67,14 +67,13 @@ class Adventure extends React.Component {
 		return (
 			<>
 				<h1>This is a test. </h1> 
-				<div className="map">
-					<p> MAP will go here-ish as we call a component! </p>
-				</div>
+					<Map lng={this.state.locLong} lat={this.state.locLat}/>
+				
 				<img src={this.state.pictureUrl} alt='goal'/>
 				<button onClick={this.handleButtonClick} >I'm a button</button>
 
 			</>
-		);	
+		)	
 	}
 } 
 

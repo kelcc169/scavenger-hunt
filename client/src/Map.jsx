@@ -9,8 +9,8 @@ class Map extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			lng: '',
-			lat: ''
+			lng: this.props.lng,
+			lat: this.props.lat
 		}
 	}
 
@@ -21,19 +21,21 @@ class Map extends React.Component {
 			zoom: 9
 		}
 	);
+	let lat = this.state.lat
+	let lng = this.state.lng
 
 	return (
 			<>
 				<div className="mapboxBox">
 					<Map
-							center = {[-122.341408, 47.609797]}
+							center = {[lng, lat]}
 							style="mapbox://styles/mapbox/streets-v9"
 							containerStyle={{
-								height: '100vh',
-								width: '100vw'
+								height: '250px',
+								width: '250px'
 							}}>
 						{/* <DrawControl /> */}
-					</Map>;
+					</Map>
 				</div>
 			<button onClick={this.handleButtonClick}>SOMEDAY I'LL BE A USEFUL SUBMIT BUTTON! </button>
 			</>
