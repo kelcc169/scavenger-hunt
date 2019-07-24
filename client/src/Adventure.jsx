@@ -71,6 +71,7 @@ class Adventure extends React.Component {
 				</div>
 				<img src={this.state.pictureUrl} alt='goal'/>
 				<button onClick={this.handleButtonClick} >I'm a button</button>
+
 			</>
 		);	
 	}
