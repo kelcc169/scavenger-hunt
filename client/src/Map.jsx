@@ -15,10 +15,6 @@ class Map extends React.Component {
 		}
 	);
 
-	// if creating...
-		// return map with geolocation
-	// if !creating...
-
 	return (
 			<>
 				<div className="mapboxBox">

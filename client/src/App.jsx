@@ -78,16 +78,16 @@ class App extends React.Component {
 
   render() {
     var user = this.state.user;
+    var token = this.state.token;
     var contents;
+
     if (user) {
       contents = (
-        <Router>
-          <Profile user={user} />
-        </Router>
+        <Profile user={user} token={token} />
       );
     } else {
       contents = (
-        <Router>
+        <>
           <nav>
             <Link className="brn-default" to="/login">Login</Link>{" "}
             <Link className="brn-default"  to="/signup">Signup</Link>
@@ -98,13 +98,15 @@ class App extends React.Component {
           <Route path="/signup" 
             render={() => <Signup liftToken={this.liftToken}/>} 
           />
-        </Router>
+        </>
       )
     }
-
+    
     return(
       <>
+        <Router>
         {contents} 
+        </Router>
       </>
     );
   }

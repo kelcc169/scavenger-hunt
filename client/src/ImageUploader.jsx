@@ -16,7 +16,7 @@ class ImageUploader extends Component {
         <label htmlFor='single'>
           <i className="fas fa-camera-retro" />
         </label>
-        <input hidden type='file' id='single' onChange={this.props.onChange} /> 
+        <input hidden type='file' id='single' onChange={this.props.onChange} capture="camera" /> 
       </div>
     } else {
       clickme = <img src={this.state.pictureUrl} alt="target"/>
