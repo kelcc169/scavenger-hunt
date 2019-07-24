@@ -4,3 +4,16 @@ img {
   transform: rotate(90deg);
   border-radius: 50%;
 }
+
+.button {
+  width: 100px;
+  border-radius: 50%;
+  text-align: center;
+  background-color: gray;
+}
+
+.fa-camera-retro {
+  color: white;
+  font-size: 2em;
+  margin: 25px;
+}

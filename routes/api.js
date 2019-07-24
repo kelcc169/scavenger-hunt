@@ -48,7 +48,7 @@ router.post('/lists', (req, res) => {
   })
 })
 
-// post a location (for now)
+// post a location
 router.post('/lists/:id/locations', (req, res) => {
   List.findById(req.params.id, (err, list) => {
     let newLocation = new Location({
@@ -68,8 +68,10 @@ router.post('/lists/:id/locations', (req, res) => {
   })
 })
 
+// update? -maybe user, add completed lists to a user
+
 // delete a list
-router.delete('/list/:id', (req, res) => {
+router.delete('/lists/:id', (req, res) => {
   List.findByIdAndDelete(req.params.id, (err) => {
     if (err) res.json(err)
     res.json('deleted the list!')
