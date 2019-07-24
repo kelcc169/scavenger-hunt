@@ -2,12 +2,12 @@ import React from 'react';
 import axios from 'axios';
 import Adventure from './Adventure';
 import AdventureList from './AdventureList';
+import CreateAdventure from './CreateAdventure';
 import {
   BrowserRouter as Router,
   Route
 }
 from 'react-router-dom';
-import ImageUploader from './ImageUploader';
 
 class Profile extends React.Component {
   constructor(props) {
@@ -32,6 +32,7 @@ class Profile extends React.Component {
   }
 
   componentDidMount() {
+    axios.defaults.headers.common['Authorization'] = `Bearer ${this.props.token}`
     axios.get('/api/lists')
       .then(res => {
         let lists = res.data
@@ -45,7 +46,7 @@ class Profile extends React.Component {
     let lists = this.state.lists ? this.state.lists : [];
 
     return(
-      <Router>
+      <>
         <Route exact path='/' 
           render={() => <AdventureList 
             lists={lists} 
@@ -56,9 +57,9 @@ class Profile extends React.Component {
             listId={this.state.selectedList} />}
         />
         <Route path='/create'
-          render={() => <ImageUploader onChange={this.props.onChange} />}
+          render={() => <CreateAdventure onChange={this.props.onChange} />}
         />
-      </Router>
+      </>
     )
   }
 }

@@ -17,7 +17,7 @@ class Map extends React.Component {
 			maxZoom: 16
 		},		
 	);
-	
+
 	return (
 			<>
 				<div className="mapboxBox">
