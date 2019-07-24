@@ -3,7 +3,6 @@ import axios from 'axios';
 import Login from './Login';
 import Signup from './Signup';
 import Profile from './Profile';
-import ImageUploader from './ImageUploader'
 import {
   BrowserRouter as Router,
   Route,

@@ -1,25 +1,35 @@
 import React, { Component } from 'react'
-import axios from 'axios'
+
 class ImageUploader extends Component {
-    state = {
-        selectedFile: null
+  constructor(props) {
+    super(props);
+    this.state = {
+      pictureUrl: ''
     }
-    ImageUploadhandler = event =>{
-        this.setState({
-            selectedFile:event.target.files[0]
-        })
+  }
+
+  render() {
+    let clickme;
+    if (this.state.pictureUrl === '') {
+      clickme = 
+      <div className='button'>
+        <label htmlFor='single'>
+          <i className="fas fa-camera-retro" />
+        </label>
+        <input hidden type='file' id='single' onChange={this.props.onChange} /> 
+      </div>
+    } else {
+      clickme = <img src={this.state.pictureUrl} alt="target"/>
     }
-    fileUploadhandler = () => {
-        
-    }
-    render() {
-        return (
-            <div className="container">
-                <input  type="file" onChange={this.ImageUploadhandler}/>
-                <button className="btn-success" onClick={this.fileUploadhandler}>Upload</button>
-            </div>
-        )
-    }
+
+    return (
+      <>
+        <div className="upload" >
+          {clickme}
+        </div>
+      </>
+    )
+  }
 }
 
-export default ImageUploader
+export default ImageUploader;

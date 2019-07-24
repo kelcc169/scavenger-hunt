@@ -7,6 +7,7 @@ import {
   Route
 }
 from 'react-router-dom';
+import ImageUploader from './ImageUploader';
 
 class Profile extends React.Component {
   constructor(props) {
@@ -24,6 +25,10 @@ class Profile extends React.Component {
     this.setState({
       selectedList
     })
+  }
+
+  onChange(e) {
+    console.log(e.target.file)
   }
 
   componentDidMount() {
@@ -48,8 +53,11 @@ class Profile extends React.Component {
         />
         <Route path='/adventure' 
           render={(props) => <Adventure 
-            listId={this.state.selectedList}/>}
-        /> 
+            listId={this.state.selectedList} />}
+        />
+        <Route path='/create'
+          render={() => <ImageUploader onChange={this.props.onChange} />}
+        />
       </Router>
     )
   }
