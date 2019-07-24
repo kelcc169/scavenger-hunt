@@ -32,7 +32,7 @@ class Map extends React.Component {
 								height: '100vh',
 								width: '100vw'
 							}}>
-						<DrawControl />
+						{/* <DrawControl /> */}
 					</Map>;
 				</div>
 			<button onClick={this.handleButtonClick}>SOMEDAY I'LL BE A USEFUL SUBMIT BUTTON! </button>
