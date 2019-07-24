@@ -6,6 +6,7 @@ import MapMarker from './MapMarker';
 class Map extends React.Component {
 
 	render () {
+		// let creating = this.props.creating
 		let lng = this.props.lng
 		let lat = this.props.lat
 
@@ -23,14 +24,12 @@ class Map extends React.Component {
 					<Map
 						center={[lng, lat]}
 						style="mapbox://styles/mapbox/streets-v9"
-						minZoom={[3]}
-						maxZoom={[10]}
 						containerStyle={{
 							height: '500px',
 							width: '500px'
 						}}>
 						<Marker coordinates={[lng, lat]}
-							style={{backgroundColor: '#444', height: '25px', width: '25px', borderRadius: '50%'}}>
+							style={{backgroundColor: 'rgba(100, 0, 100, 50% )', height: '25px', width: '25px', borderRadius: '50%'}}>
 						</Marker>
 						<MapMarker	/>
 					</Map>
@@ -40,8 +39,5 @@ class Map extends React.Component {
 		)
 	}
 }	
-
-
-
 
 export default Map;
