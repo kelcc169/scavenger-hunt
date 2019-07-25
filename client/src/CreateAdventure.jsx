@@ -17,6 +17,7 @@ class CreateAdventure extends React.Component {
     }
     this.handleInputChange = this.handleInputChange.bind(this)
     this.handleUserLocation = this.handleUserLocation.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
     this.saveLocation = this.saveLocation.bind(this)
   }
 
@@ -35,7 +36,7 @@ class CreateAdventure extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    axios.post('/api/lists', {
+    axios.post(`/api/${this.props.user._id}/lists`, {
       name: this.state.listName
     }).then(res => {
       let listId = res.data._id

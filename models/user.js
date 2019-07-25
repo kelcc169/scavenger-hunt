@@ -19,7 +19,8 @@ const userSchema = new mongoose.Schema({
     required: [true, 'You must enter an email'],
     minlength: [5, 'Email must be between 5 and 99 characters'],
     maxlength: [128, 'Email must be between 5 and 99 characters']
-  }
+  },
+  lists: [{type: mongoose.Schema.Types.ObjectId, ref: 'List'}]
 });
 
 userSchema.set('toObject', {
