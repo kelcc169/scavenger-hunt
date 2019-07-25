@@ -17,9 +17,9 @@ class ImageUploader extends Component {
         method='POST'
         action='/imageupload'
         className='button'>
-        {/* <label htmlFor='single'>
+        <label htmlFor='single'>
           <i className="fas fa-camera-retro" />
-        </label> */}
+        </label>
         <input type='file' id='single' name='myFile' /> 
         <input type="submit" value="Add adventure" />
       </form>
