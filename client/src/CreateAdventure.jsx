@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import Map from './Map';
 import ImageUploader from './ImageUploader';
+import { Link } from 'react-router-dom';
 
 class CreateAdventure extends React.Component {
   constructor(props) {
@@ -14,11 +15,19 @@ class CreateAdventure extends React.Component {
       longitude: null
     }
     this.handleInputChange = this.handleInputChange.bind(this)
+    this.handleUserLocation = this.handleUserLocation.bind(this)
   }
 
   handleInputChange(e) {
     this.setState({
       [e.target.name]: e.target.value
+    })
+  }
+
+  handleUserLocation(e) {
+    this.setState({
+      latitude: e.lat,
+      longitude: e.lng
     })
   }
 
@@ -41,7 +50,8 @@ class CreateAdventure extends React.Component {
       contents = (
         <div>
           <ImageUploader pictureUrl={this.state.pictureUrl} />
-          <Map />
+          <Map handleUserLocation={this.handleUserLocation} />
+          <Link to='/' ><button>I'm done</button></Link>
         </div>
       )
     } else {

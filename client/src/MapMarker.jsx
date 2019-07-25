@@ -52,7 +52,10 @@ class MapMarker extends React.Component {
 		let {lng, lat} = this.state.userLocation ? this.state.userLocation : {lng: 0, lat: 0}
 		return(
 			<Marker coordinates={[lng, lat]}
-				style={{backgroundColor: 'red', height: '25px', width: '25px', borderRadius: '50%'}}>
+				onClick={() => this.props.handleUserLocation({lng, lat})}
+				style={{backgroundColor: 'red', height: '25px', width: '25px', borderRadius: '50%'}}
+				longitude={lng}
+				>
 			</Marker>
 		)
 	}

@@ -26,7 +26,7 @@ const Map = (props) => {
 						height: '500px',
 						width: '500px'
 					}}>
-					<MapMarker />
+					<MapMarker handleUserLocation={props.handleUserLocation}/>
 				</Map>
 			</div>
 		)
