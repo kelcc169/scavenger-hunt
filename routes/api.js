@@ -78,7 +78,7 @@ router.delete('/:uid/lists/:lid', (req, res) => {
       if (err) res.json(err)
       List.findByIdAndDelete(req.params.lid, (err) => {
         if (err) res.json(err)
-        res.json(1)
+        res.json(user)
       })
     })
   })

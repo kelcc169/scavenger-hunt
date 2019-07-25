@@ -10,9 +10,6 @@ const AdventureList = (props) => {
         {props.lists.map( (list, index) => 
           <div key={index}>
             <h3>{list.name}</h3>
-            <Link to='/adventure'>
-              <button onClick={props.handleListSelect} value={list._id} > Go On This Adventure! </button>
-            </Link>
             <button onClick={props.listDelete} value={list._id} >Delete</button>
           </div>
         )}

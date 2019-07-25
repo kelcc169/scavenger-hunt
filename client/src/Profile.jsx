@@ -24,11 +24,6 @@ class Profile extends React.Component {
     })
   }
 
-  handleUserLists() {
-    // axios get for all lists associated with user
-    // save those in user lists state
-  }
-
   listDelete(e) {
     let listId = e.target.value
     console.log(listId)
