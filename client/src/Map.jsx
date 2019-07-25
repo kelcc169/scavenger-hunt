@@ -2,9 +2,7 @@ import React from 'react';
 import ReactMapboxGl, { Marker } from 'react-mapbox-gl';
 import MapMarker from './MapMarker';
 
-
 class Map extends React.Component {
-
 	render () {
 		// let creating = this.props.creating
 				//SAVE THE BELOW TWO LINES
@@ -18,9 +16,8 @@ class Map extends React.Component {
 			container: 'map',
 			minZoom: 12,
 			maxZoom: 16
-		},		
-	);
-
+		});
+	
 	return (
 			<>
 				<div className="mapboxBox">
@@ -34,7 +31,7 @@ class Map extends React.Component {
 						<Marker coordinates={[lng, lat]}
 							style={{backgroundColor: 'rgba(100, 0, 100, 50% )', height: '25px', width: '25px', borderRadius: '50%'}}>
 						</Marker>
-						<MapMarker	/>
+						<MapMarker />
 					</Map>
 				</div>
 				<button onClick={this.handleButtonClick}>SOMEDAY I'LL BE A USEFUL SUBMIT BUTTON! </button>

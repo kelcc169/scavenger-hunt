@@ -12,12 +12,17 @@ class ImageUploader extends Component {
     let clickme;
     if (this.state.pictureUrl === '') {
       clickme = 
-      <div className='button'>
-        <label htmlFor='single'>
+      <form id='photo-upload'
+        encType='multipart/form-data'
+        method='POST'
+        action='/imageupload'
+        className='button'>
+        {/* <label htmlFor='single'>
           <i className="fas fa-camera-retro" />
-        </label>
-        <input hidden type='file' id='single' onChange={this.props.onChange} capture="camera" /> 
-      </div>
+        </label> */}
+        <input type='file' id='single' name='myFile' /> 
+        <input type="submit" value="Add adventure" />
+      </form>
     } else {
       clickme = <img src={this.state.pictureUrl} alt="target"/>
     }
