@@ -10,6 +10,7 @@ class Profile extends React.Component {
     super(props);
     this.state = {
       lists: [],
+      userLists: [],
       selectedList: ''
     }
     this.handleListSelect = this.handleListSelect.bind(this)
@@ -20,6 +21,11 @@ class Profile extends React.Component {
     this.setState({
       selectedList
     })
+  }
+
+  handleUserLists() {
+    // axios get for all lists associated with user
+    // save those in user lists state
   }
 
   componentDidMount() {
@@ -39,8 +45,9 @@ class Profile extends React.Component {
     return(
       <>
         <nav>
-          <Link to='/' >Adventures</Link>
-          <Link to='/create' >Create an Adventure</Link>
+          <Link to='/' >Adventures</Link>{' '}{' '}
+          <Link to='/create' >Create an Adventure</Link>{' '}{' '}
+          {/* <Link to='/myadventures' >My Adventures</Link> */}
         </nav>
         <Route exact path='/' 
           render={() => <AdventureList 
@@ -52,8 +59,14 @@ class Profile extends React.Component {
             listId={this.state.selectedList} />}
         />
         <Route path='/create'
-          render={() => <CreateAdventure token={this.props.token} user={this.props.user} />}
+          render={() => <CreateAdventure 
+            token={this.props.token} 
+            user={this.props.user} />}
         />
+        {/* <Route path='/myadventures'
+          render={() => <AdventureList 
+            lists={this.state.userLists} />} 
+        /> */}
       </>
     )
   }

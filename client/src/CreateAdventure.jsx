@@ -2,20 +2,34 @@ import React from 'react';
 import axios from 'axios';
 import Map from './Map';
 import ImageUploader from './ImageUploader';
+import { Link } from 'react-router-dom';
 
 class CreateAdventure extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      listId: null,
-      listName: ''
+      listId: '',
+      listName: '',
+      pictureUrl: '',
+      latitude: null,
+      longitude: null,
+      listIndex: 1
     }
     this.handleInputChange = this.handleInputChange.bind(this)
+    this.handleUserLocation = this.handleUserLocation.bind(this)
+    this.saveLocation = this.saveLocation.bind(this)
   }
 
   handleInputChange(e) {
     this.setState({
       [e.target.name]: e.target.value
+    })
+  }
+
+  handleUserLocation(e) {
+    this.setState({
+      latitude: e.lat,
+      longitude: e.lng
     })
   }
 
@@ -31,14 +45,30 @@ class CreateAdventure extends React.Component {
     })
   }
 
+  saveLocation(e) {
+    e.preventDefault();
+    let listId = this.state.listId
+    console.log(listId)
+    axios.post(`/api/lists/${this.state.listId}/locations`, {
+      lat: this.state.latitude,
+      lng: this.state.longitude,
+      pictureUrl: '',
+      listIndex: this.state.listIndex
+    }).then(res => {
+      console.log(res.data)
+    })
+  }
+
   render() {
     let contents;
     
     if (this.state.listId) {
       contents = (
         <div>
-          <Map />
-          <ImageUploader />
+          <ImageUploader pictureUrl={this.state.pictureUrl} />
+          <Map handleUserLocation={this.handleUserLocation} />
+          <button onClick={this.saveLocation} >Save This Location</button>
+          <Link to='/' ><button>I'm done</button></Link>
         </div>
       )
     } else {
