@@ -3,11 +3,7 @@ import axios from 'axios';
 import Adventure from './Adventure';
 import AdventureList from './AdventureList';
 import CreateAdventure from './CreateAdventure';
-import {
-  BrowserRouter as Router,
-  Route
-}
-from 'react-router-dom';
+import { Route, Link } from 'react-router-dom';
 
 class Profile extends React.Component {
   constructor(props) {
@@ -27,10 +23,6 @@ class Profile extends React.Component {
     })
   }
 
-  onChange(e) {
-    console.log(e.target.file)
-  }
-
   componentDidMount() {
     axios.defaults.headers.common['Authorization'] = `Bearer ${this.props.token}`
     axios.get('/api/lists')
@@ -47,6 +39,10 @@ class Profile extends React.Component {
 
     return(
       <>
+        <nav>
+          <Link to='/' >Adventures</Link>
+          <Link to='/create' >Create an Adventure</Link>
+        </nav>
         <Route exact path='/' 
           render={() => <AdventureList 
             lists={lists} 
@@ -57,7 +53,7 @@ class Profile extends React.Component {
             listId={this.state.selectedList} />}
         />
         <Route path='/create'
-          render={() => <CreateAdventure onChange={this.props.onChange} />}
+          render={() => <CreateAdventure token={this.props.token} />}
         />
       </>
     )

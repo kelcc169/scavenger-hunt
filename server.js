@@ -4,12 +4,31 @@ const mongoose = require('mongoose');
 const expressJWT = require('express-jwt');
 const helmet = require('helmet');
 const RateLimit = require('express-rate-limit');
+const cloudinary = require('cloudinary');
+const multer = require('multer');
+const cloudinaryStorage = require('multer-storage-cloudinary');
 
 const app = express();
+const upload = multer({dest: './uploads'});
 
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 app.use(helmet());
+
+cloudinary.config({
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.CLOUD_KEY,
+  api_secret: process.env.CLOUD_SECRET
+});
+
+const storage = cloudinaryStorage({
+  cloudinary: cloudinary,
+  folder: 'Scavengers',
+  allowedFormats: ['jpg', 'png'],
+  transformations: [{width: 100, height: 100, crop: 'limit'}]
+});
+
+const parser = multer({storage: storage})
 
 const loginLimiter = new RateLimit({
   windowMs: 5*60*1000,
@@ -25,7 +44,6 @@ const signupLimiter = new RateLimit({
   message: 'Maximum accounts created. Please try again later'
 });
 
-
 mongoose.connect('/mongodb://localhost/scavenger', {useNewUrlParser: true});
 const db = mongoose.connection;
 db.once('open', () => {
@@ -37,6 +55,14 @@ db.on('error', (err) => {
 
 // app.use('/auth/login', loginLimiter);
 // app.use('/auth/signup', signupLimiter);
+
+app.post('/imageupload', parser.single('myFile'), (req, res) => {
+  // const image = {};
+  // image.url = req.file.url;
+  // image.id = req.file.public_id;
+  console.log(req);
+  
+})
 
 app.use('/auth', require('./routes/auth'));
 app.use('/api', expressJWT({secret: process.env.JWT_SECRET}), require('./routes/api'));
