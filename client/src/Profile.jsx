@@ -5,7 +5,8 @@ import AdventureList from './AdventureList';
 import CreateAdventure from './CreateAdventure';
 import {
   BrowserRouter as Router,
-  Route
+  Route,
+  Link
 }
 from 'react-router-dom';
 
@@ -47,6 +48,9 @@ class Profile extends React.Component {
 
     return(
       <>
+        <nav>
+          <Link to='/create' >Create</Link>
+        </nav>
         <Route exact path='/' 
           render={() => <AdventureList 
             lists={lists} 

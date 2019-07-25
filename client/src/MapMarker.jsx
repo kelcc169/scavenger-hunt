@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactMapboxGl, { Marker } from 'react-mapbox-gl';
+import axios from 'axios';
 
 class MapMarker extends React.Component {
 	constructor(props) {
@@ -32,6 +33,24 @@ getUserLocation() {
 		});
 	});
 } 
+
+//Under construction under Carlo's guidance.
+// saveUserLocation() {
+// 	let listId = this.props.listId
+// 		axios.post(`api/lists/${listId}/locations`, 
+// 			{body: {latitude: this.state.userLocation.lat, 
+// 						longitude: this.state.userLocation.lng
+// 					}
+// 				}
+// 			)
+// }
+
+// latitude: req.body.lat,
+//       longitude: req.body.lng,
+//       pictureUrl: req.body.pictureUrl
+
+
+
 
 render() {
 	let {lng, lat} = this.state.userLocation ? this.state.userLocation : {lng: 0, lat: 0}
