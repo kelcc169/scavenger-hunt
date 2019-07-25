@@ -1,6 +1,6 @@
 import React from 'react';
-import ReactMapboxGl, { Marker } from 'react-mapbox-gl';
-import axios from 'axios';
+import { Marker } from 'react-mapbox-gl';
+// import axios from 'axios';
 
 class MapMarker extends React.Component {
 	constructor(props) {

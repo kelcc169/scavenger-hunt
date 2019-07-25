@@ -9,7 +9,6 @@ class Profile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: this.props.user,
       lists: [],
       selectedList: ''
     }
@@ -53,7 +52,7 @@ class Profile extends React.Component {
             listId={this.state.selectedList} />}
         />
         <Route path='/create'
-          render={() => <CreateAdventure token={this.props.token} />}
+          render={() => <CreateAdventure token={this.props.token} user={this.props.user}/>}
         />
       </>
     )
