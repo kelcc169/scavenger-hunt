@@ -12,27 +12,31 @@ class MapMarker extends React.Component {
 		this.getUserLocation = this.getUserLocation.bind(this);
 	}
 
-componentDidMount() {
-	let handle = setInterval(this.getUserLocation, 1000)
-	this.setState({
-		intervalHandle: handle
-	})
-}
-
-componentWillUnmount(){
-	clearInterval(this.state.intervalHandle)
-}
-
-getUserLocation() {
-	navigator.geolocation.getCurrentPosition(position => {
+	componentDidMount() {
+		let handle = setInterval(this.getUserLocation, 1000)
 		this.setState({
 			userLocation: {
 				lat: position.coords.latitude,
 				lng: position.coords.longitude
 			}
 		});
-	});
-} 
+	  });
+  }
+  
+  componentWillUnmount(){
+		clearInterval(this.state.intervalHandle)
+	}
+
+  getUserLocation() {
+		navigator.geolocation.getCurrentPosition(position => {
+			this.setState({
+				userLocation: {
+					lat: position.coords.latitude,
+					lng: position.coords.longitude
+				}
+			});
+		});
+	} 
 
 //Under construction under Carlo's guidance.
 // saveUserLocation() {
@@ -49,26 +53,14 @@ getUserLocation() {
 //       longitude: req.body.lng,
 //       pictureUrl: req.body.pictureUrl
 
-
-
-
-render() {
-	let {lng, lat} = this.state.userLocation ? this.state.userLocation : {lng: 0, lat: 0}
-	return(
-		<Marker coordinates={[lng, lat]}
-			style={{backgroundColor: 'red', height: '25px', width: '25px', borderRadius: '50%'}}>
-		</Marker>
-	)
-
-
+	render() {
+		let {lng, lat} = this.state.userLocation ? this.state.userLocation : {lng: 0, lat: 0}
+		return(
+			<Marker coordinates={[lng, lat]}
+				style={{backgroundColor: 'red', height: '25px', width: '25px', borderRadius: '50%'}}>
+			</Marker>
+		)
+	}
 }
-
-
-}
-
-
-
-
-
 
 export default MapMarker;

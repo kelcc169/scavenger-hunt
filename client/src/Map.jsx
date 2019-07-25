@@ -2,9 +2,7 @@ import React from 'react';
 import ReactMapboxGl, { Marker } from 'react-mapbox-gl';
 import MapMarker from './MapMarker';
 
-
 class Map extends React.Component {
-
 	render () {
 		// let creating = this.props.creating
 				//SAVE THE BELOW TWO LINES
@@ -18,9 +16,8 @@ class Map extends React.Component {
 			container: 'map',
 			minZoom: 12,
 			maxZoom: 16
-		},		
-	);
-
+		});
+	
 	return (
 			<>
 				<div className="mapboxBox">

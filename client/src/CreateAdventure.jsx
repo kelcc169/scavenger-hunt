@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import Map from './Map';
 import axios from 'axios';
 import ImageUploader from './ImageUploader';
@@ -40,7 +41,7 @@ class CreateAdventure extends React.Component {
         <div>
           <Map />
           {/* <ImageUploader /> */}
-      </div>
+        </div>
       )
     } else {
       contents = (
