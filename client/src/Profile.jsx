@@ -14,6 +14,7 @@ class Profile extends React.Component {
       selectedList: ''
     }
     this.handleListSelect = this.handleListSelect.bind(this)
+    this.listDelete = this.listDelete.bind(this)
   }
 
   handleListSelect(e) {
@@ -28,6 +29,15 @@ class Profile extends React.Component {
     // save those in user lists state
   }
 
+  listDelete(e) {
+    let listId = e.target.value
+    console.log(listId)
+    axios.delete(`/api/${this.props.user._id}/lists/${listId}`)
+      .then(res => {
+        console.log('success!')
+      })
+  }
+
   componentDidMount() {
     axios.defaults.headers.common['Authorization'] = `Bearer ${this.props.token}`
     axios.get('/api/lists')
@@ -35,6 +45,14 @@ class Profile extends React.Component {
         let lists = res.data
         this.setState({
           lists
+        })
+      })
+    axios.get(`/api/users/${this.props.user._id}`)
+      .then(res => {
+        let userLists = res.data.lists
+        console.log(userLists)
+        this.setState({
+          userLists
         })
       })
   }
@@ -47,7 +65,7 @@ class Profile extends React.Component {
         <nav>
           <Link to='/' >Adventures</Link>{' '}{' '}
           <Link to='/create' >Create an Adventure</Link>{' '}{' '}
-          {/* <Link to='/myadventures' >My Adventures</Link> */}
+          <Link to='/myadventures' >My Adventures</Link>
         </nav>
         <Route exact path='/' 
           render={() => <AdventureList 
@@ -63,10 +81,12 @@ class Profile extends React.Component {
             token={this.props.token} 
             user={this.props.user} />}
         />
-        {/* <Route path='/myadventures'
+        <Route path='/myadventures'
           render={() => <AdventureList 
-            lists={this.state.userLists} />} 
-        /> */}
+            lists={this.state.userLists} 
+            user={this.props.user} 
+            listDelete={this.listDelete} />} 
+        />
       </>
     )
   }

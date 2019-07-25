@@ -28,23 +28,26 @@ router.get('/lists/:id', (req, res) => {
   })
 })
 
-// get one location (FOR TESTING PURPOSES)
-router.get('/locations/:id', (req, res) => {
-  Location.findById(req.params.id, (err, location) => {
+// get all lists associated with user
+router.get('/users/:id', (req, res) => {
+  User.findById(req.params.id).populate('lists').exec( (err, user) => {
     if (err) res.json(err)
-    res.json(location)
+    res.json(user)
   })
 })
 
 // post a list
-router.post('/lists', (req, res) => {
-  let newList = new List({
-    name: req.body.name,
-    // createdBy: user._id
-  })
-  newList.save( (err,list) => {
-    if (err) res.json(err)
-    res.json(list)
+router.post('/:id/lists', (req, res) => {
+  User.findById(req.params.id, (err, user) => {
+    let newList = new List({
+      name: req.body.name,
+    })
+    newList.save( (err,list) => {
+      user.lists.push(list)
+      user.save()
+      if (err) res.json(err)
+      res.json(list)
+    })
   })
 })
 
@@ -67,13 +70,17 @@ router.post('/lists/:id/locations', (req, res) => {
   })
 })
 
-// update? -maybe user, add completed lists to a user
-
 // delete a list
-router.delete('/lists/:id', (req, res) => {
-  List.findByIdAndDelete(req.params.id, (err) => {
-    if (err) res.json(err)
-    res.json('deleted the list!')
+router.delete('/:uid/lists/:lid', (req, res) => {
+  User.findById(req.params.uid, (err, user) => {
+    user.lists.pull(req.params.lid)
+    user.save( err => {
+      if (err) res.json(err)
+      List.findByIdAndDelete(req.params.lid, (err) => {
+        if (err) res.json(err)
+        res.json(1)
+      })
+    })
   })
 })
 
