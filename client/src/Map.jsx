@@ -7,8 +7,11 @@ class Map extends React.Component {
 
 	render () {
 		// let creating = this.props.creating
-		let lng = this.props.lng
-		let lat = this.props.lat
+				//SAVE THE BELOW TWO LINES
+		// let lng = this.props.lng
+		// let lat = this.props.lat
+		let lng = this.props.lng ? this.props.lng : -122.312328
+		let lat = this.props.lat ? this.props.lat : 47.634432
 
 		const Map = new ReactMapboxGl({
 			accessToken: 'pk.eyJ1IjoibWNkdWRsZXk4NyIsImEiOiJjanhlejR5YWIwdWFwM25tcHNubDdpejIwIn0.n-RmlJrsycjQ76M82M_02Q',
@@ -41,3 +44,6 @@ class Map extends React.Component {
 }	
 
 export default Map;
+
+
+
