@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const AdventureList = (props) => (
   <div>
@@ -7,7 +7,7 @@ const AdventureList = (props) => (
       <div key={index}>
         <h3>{list.name}</h3>
         <Link to='/adventure'>
-          <button onClick={props.handleListSelect} value={list._id} > Go On An Adventure! </button>
+          <button onClick={props.handleListSelect} value={list._id} > Go On This Adventure! </button>
         </Link>
       </div>
     )}

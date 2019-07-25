@@ -9,7 +9,9 @@ class CreateAdventure extends React.Component {
     this.state = {
       listId: null,
       listName: '',
-      pictureUrl: ''
+      pictureUrl: '',
+      latitude: null,
+      longitude: null
     }
     this.handleInputChange = this.handleInputChange.bind(this)
   }
@@ -38,8 +40,8 @@ class CreateAdventure extends React.Component {
     if (this.state.listId) {
       contents = (
         <div>
-          <Map />
           <ImageUploader pictureUrl={this.state.pictureUrl} />
+          <Map />
         </div>
       )
     } else {
