@@ -8,10 +8,8 @@ class Adventure extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			listId: this.props.listId,
 			listName: '',
 			locations: [],
-			locName: '',
 			locLat: '',
 			locLong: '',
 			pictureUrl: '',
@@ -28,7 +26,6 @@ class Adventure extends React.Component {
 
 		if (listIndex < listArr.length) {
 			this.setState({
-				locName: location.name,
 				locLat: location.latitude,
 				locLong: location.longitude,
 				pictureUrl: location.pictureUrl,
@@ -37,7 +34,6 @@ class Adventure extends React.Component {
 		} else {
 			// you win!
 			this.setState({
-				locName: listArr[0].name,
 				locLat: listArr[0].latitude,
 				locLong: listArr[0].longitude,
 				pictureUrl: listArr[0].pictureUrl,
@@ -47,14 +43,13 @@ class Adventure extends React.Component {
 	}
 
 	componentDidMount() {
-		axios.get(`/api/lists/${this.state.listId}`)
+		axios.get(`/api/lists/${this.props.listId}`)
 			.then(res => {
 				let list = res.data;
 				let locations = res.data.locations
 				this.setState({
 					listName: list.name,
 					locations,
-					locName: locations[0].name,
 					locLat: locations[0].latitude,
 					locLong: locations[0].longitude,
 					pictureUrl: locations[0].pictureUrl,
@@ -67,7 +62,7 @@ class Adventure extends React.Component {
 		return (
 			<>
 				<h1>This is a test. </h1> 
-				<Map lng={this.state.locLong} lat={this.state.locLat} listId={this.state.listId} />
+				<Map lng={this.state.locLong} lat={this.state.locLat} listId={this.props.listId} />
 				<img src={this.state.pictureUrl} alt='goal' />
 				<button onClick={this.handleButtonClick} >I'm a button</button>
 			</>
