@@ -55,6 +55,7 @@ router.post('/lists/:id/locations', (req, res) => {
       latitude: req.body.lat,
       longitude: req.body.lng,
       pictureUrl: req.body.pictureUrl,
+      listIndex: req.body.listIndex
     })
     newLocation.save( (err, location) => {
       list.locations.push(location)
