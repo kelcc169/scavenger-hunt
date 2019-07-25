@@ -8,14 +8,16 @@ class CreateAdventure extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      listId: null,
+      listId: '',
       listName: '',
       pictureUrl: '',
       latitude: null,
-      longitude: null
+      longitude: null,
+      listIndex: 1
     }
     this.handleInputChange = this.handleInputChange.bind(this)
     this.handleUserLocation = this.handleUserLocation.bind(this)
+    this.saveLocation = this.saveLocation.bind(this)
   }
 
   handleInputChange(e) {
@@ -43,6 +45,20 @@ class CreateAdventure extends React.Component {
     })
   }
 
+  saveLocation(e) {
+    e.preventDefault();
+    let listId = this.state.listId
+    console.log(listId)
+    axios.post(`/api/lists/${this.state.listId}/locations`, {
+      lat: this.state.latitude,
+      lng: this.state.longitude,
+      pictureUrl: '',
+      listIndex: this.state.listIndex
+    }).then(res => {
+      console.log(res.data)
+    })
+  }
+
   render() {
     let contents;
     
@@ -51,6 +67,7 @@ class CreateAdventure extends React.Component {
         <div>
           <ImageUploader pictureUrl={this.state.pictureUrl} />
           <Map handleUserLocation={this.handleUserLocation} />
+          <button onClick={this.saveLocation} >Save This Location</button>
           <Link to='/' ><button>I'm done</button></Link>
         </div>
       )

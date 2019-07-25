@@ -16,6 +16,7 @@ class MapMarker extends React.Component {
 		this.setState({
 			intervalHandle: handle
 		})
+		
 	}
 
 	componentWillUnmount(){
@@ -32,21 +33,6 @@ class MapMarker extends React.Component {
 			});
 		});
 	} 
-
-//Under construction under Carlo's guidance.
-// saveUserLocation() {
-// 	let listId = this.props.listId
-// 		axios.post(`api/lists/${listId}/locations`, 
-// 			{body: {latitude: this.state.userLocation.lat, 
-// 						longitude: this.state.userLocation.lng
-// 					}
-// 				}
-// 			)
-// }
-
-// latitude: req.body.lat,
-//       longitude: req.body.lng,
-//       pictureUrl: req.body.pictureUrl
 
 	render() {
 		let {lng, lat} = this.state.userLocation ? this.state.userLocation : {lng: 0, lat: 0}
