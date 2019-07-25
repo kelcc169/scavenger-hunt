@@ -8,7 +8,8 @@ class CreateAdventure extends React.Component {
     super(props);
     this.state = {
       listId: null,
-      listName: ''
+      listName: '',
+      pictureUrl: ''
     }
     this.handleInputChange = this.handleInputChange.bind(this)
   }
@@ -38,7 +39,7 @@ class CreateAdventure extends React.Component {
       contents = (
         <div>
           <Map />
-          <ImageUploader />
+          <ImageUploader pictureUrl={this.state.pictureUrl} />
         </div>
       )
     } else {
