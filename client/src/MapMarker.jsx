@@ -1,5 +1,6 @@
 import React from 'react';
-import { Marker } from 'react-mapbox-gl';
+import ReactMapboxGl, { Marker } from 'react-mapbox-gl';
+import axios from 'axios';
 
 class MapMarker extends React.Component {
 	constructor(props) {
@@ -14,15 +15,19 @@ class MapMarker extends React.Component {
 	componentDidMount() {
 		let handle = setInterval(this.getUserLocation, 1000)
 		this.setState({
-			intervalHandle: handle
-		})
-	}
-
-	componentWillUnmount(){
+			userLocation: {
+				lat: position.coords.latitude,
+				lng: position.coords.longitude
+			}
+		});
+	  });
+  }
+  
+  componentWillUnmount(){
 		clearInterval(this.state.intervalHandle)
 	}
 
-	getUserLocation() {
+  getUserLocation() {
 		navigator.geolocation.getCurrentPosition(position => {
 			this.setState({
 				userLocation: {
@@ -32,6 +37,21 @@ class MapMarker extends React.Component {
 			});
 		});
 	} 
+
+//Under construction under Carlo's guidance.
+// saveUserLocation() {
+// 	let listId = this.props.listId
+// 		axios.post(`api/lists/${listId}/locations`, 
+// 			{body: {latitude: this.state.userLocation.lat, 
+// 						longitude: this.state.userLocation.lng
+// 					}
+// 				}
+// 			)
+// }
+
+// latitude: req.body.lat,
+//       longitude: req.body.lng,
+//       pictureUrl: req.body.pictureUrl
 
 	render() {
 		let {lng, lat} = this.state.userLocation ? this.state.userLocation : {lng: 0, lat: 0}

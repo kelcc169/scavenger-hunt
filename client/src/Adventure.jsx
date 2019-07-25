@@ -67,7 +67,7 @@ class Adventure extends React.Component {
 		return (
 			<>
 				<h1>This is a test. </h1> 
-				<Map lng={this.state.locLong} lat={this.state.locLat} />
+				<Map lng={this.state.locLong} lat={this.state.locLat} listId={this.state.listId} />
 				<img src={this.state.pictureUrl} alt='goal' />
 				<button onClick={this.handleButtonClick} >I'm a button</button>
 			</>

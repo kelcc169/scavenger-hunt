@@ -52,11 +52,9 @@ router.post('/lists', (req, res) => {
 router.post('/lists/:id/locations', (req, res) => {
   List.findById(req.params.id, (err, list) => {
     let newLocation = new Location({
-      name: req.body.name,
       latitude: req.body.lat,
       longitude: req.body.lng,
       pictureUrl: req.body.pictureUrl,
-      listIndex: req.body.listIndex
     })
     newLocation.save( (err, location) => {
       list.locations.push(location)

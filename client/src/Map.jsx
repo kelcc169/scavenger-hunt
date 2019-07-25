@@ -31,10 +31,9 @@ class Map extends React.Component {
 						<Marker coordinates={[lng, lat]}
 							style={{backgroundColor: 'rgba(100, 0, 100, 50% )', height: '25px', width: '25px', borderRadius: '50%'}}>
 						</Marker>
-						<MapMarker />
+						<MapMarker listId={this.props.listId}	/>
 					</Map>
 				</div>
-				<button onClick={this.handleButtonClick}>SOMEDAY I'LL BE A USEFUL SUBMIT BUTTON! </button>
 			</>
 		)
 	}
