@@ -14,6 +14,7 @@ const upload = multer({dest: './uploads'});
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 app.use(helmet());
+app.use(express.static(__dirname + '/client/build'));
 
 cloudinary.config({
   cloud_name: process.env.CLOUD_NAME,
@@ -44,7 +45,7 @@ const signupLimiter = new RateLimit({
   message: 'Maximum accounts created. Please try again later'
 });
 
-mongoose.connect('/mongodb://localhost/scavenger', {useNewUrlParser: true, useFindAndModify: false});
+mongoose.connect(process.env.MONGODB_URI, {useNewUrlParser: true, useFindAndModify: false});
 const db = mongoose.connection;
 db.once('open', () => {
   console.log(`Connected to Mongo on ${db.host}:${db.port}`);
@@ -53,8 +54,8 @@ db.on('error', (err) => {
   console.log(`Database error:\n${err}`);
 });
 
-// app.use('/auth/login', loginLimiter);
-// app.use('/auth/signup', signupLimiter);
+app.use('/auth/login', loginLimiter);
+app.use('/auth/signup', signupLimiter);
 
 app.post('/imageupload', upload.single('myFile'), (req, res) => {
   cloudinary.uploader.upload(req.file.path, function (result) {
@@ -63,10 +64,12 @@ app.post('/imageupload', upload.single('myFile'), (req, res) => {
 })
 
 app.use('/auth', require('./routes/auth'));
-app.use('/api', require('./routes/api'));
+app.use('/api', expressJWT({secret: process.env.JWT_SECRET}), require('./routes/api'));
+
+app.get('*', function(req, res) {
+	res.sendFile(__dirname + '/client/build/index.html');
+});
 
 app.listen(process.env.PORT, () => {
   console.log(`You're listening to port ${process.env.PORT}...`)
 });
-
-// expressJWT({secret: process.env.JWT_SECRET}),
