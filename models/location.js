@@ -5,7 +5,6 @@ const locationSchema = new mongoose.Schema ({
   latitude: Number,
   longitude: Number,
   pictureUrl: String,
-  listId: {type: mongoose.Schema.Types.ObjectId, ref: "List"},
   listIndex: Number
 })
 

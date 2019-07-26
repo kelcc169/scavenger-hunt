@@ -23,8 +23,8 @@ const Map = (props) => {
 					center={[-122.3352, 47.6079]}
 					style="mapbox://styles/mapbox/streets-v9"
 					containerStyle={{
-						height: '500px',
-						width: '500px'
+						height: '50vh',
+						width: '91vw'
 					}}>
 					<MapMarker handleUserLocation={props.handleUserLocation}/>
 				</Map>
@@ -37,8 +37,8 @@ const Map = (props) => {
 					center={[lng, lat]}
 					style="mapbox://styles/mapbox/streets-v9"
 					containerStyle={{
-						height: '500px',
-						width: '500px'
+						height: '50vh',
+						width: '90vw'
 					}}>
 					<Marker coordinates={[lng, lat]}
 						style={{backgroundColor: 'rgba(100, 0, 100, 50%)', height: '25px', width: '25px', borderRadius: '50%'}}>

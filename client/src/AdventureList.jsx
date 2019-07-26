@@ -12,10 +12,10 @@ const AdventureList = (props) => {
             <h3>{list.name}</h3>
             <form onSubmit={(e) => props.handleNameUpdate(e)} >
               <input type="text" name="listName" onChange={(e) => props.handleInputChange(e)} />
-              <input type="submit" value="Rename List" />
+              <input type="submit" value="Rename List" className="roundedBtn" />
               <input hidden type="text" name="listId" readOnly value={list._id} />
             </form>
-            <button onClick={props.deleteList} value={list._id} >Delete</button>
+            <button onClick={props.deleteList} value={list._id} className="roundedBtn" >Delete</button>
           </div>
         )}
       </div>
@@ -27,7 +27,7 @@ const AdventureList = (props) => {
           <div key={index}>
             <h3>{list.name}</h3>
             <Link to='/adventure'>
-              <button onClick={props.handleListSelect} value={list._id} > Go On This Adventure! </button>
+              <button onClick={props.handleListSelect} value={list._id} className="roundedBtn" > Go On This Adventure! </button>
             </Link>
           </div>
         )}
