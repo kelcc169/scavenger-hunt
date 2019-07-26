@@ -28,6 +28,7 @@ class CreateAdventure extends React.Component {
   }
 
   handleUserLocation(e) {
+    // e.preventDefault();
     this.setState({
       latitude: e.lat,
       longitude: e.lng
@@ -36,6 +37,7 @@ class CreateAdventure extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
+
     axios.post(`/api/${this.props.user._id}/lists`, {
       name: this.state.listName
     }).then(res => {
@@ -69,7 +71,7 @@ class CreateAdventure extends React.Component {
           <ImageUploader pictureUrl={this.state.pictureUrl} />
           <Map handleUserLocation={this.handleUserLocation} />
           <button onClick={this.saveLocation} >Save This Location</button>
-          <Link to='/' ><button>I'm done</button></Link>
+          <Link to='/' ><button onClick={this.props.getLists} >I'm done</button></Link>
         </div>
       )
     } else {

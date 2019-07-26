@@ -11,10 +11,14 @@ class Profile extends React.Component {
     this.state = {
       lists: [],
       userLists: [],
-      selectedList: ''
+      selectedList: '',
+      listName: '',
     }
     this.handleListSelect = this.handleListSelect.bind(this)
-    this.listDelete = this.listDelete.bind(this)
+    this.handleInputChange = this.handleInputChange.bind(this)
+    this.handleNameUpdate = this.handleNameUpdate.bind(this)
+    this.getLists = this.getLists.bind(this)
+    this.deleteList = this.deleteList.bind(this)
   }
 
   handleListSelect(e) {
@@ -24,16 +28,25 @@ class Profile extends React.Component {
     })
   }
 
-  listDelete(e) {
-    let listId = e.target.value
-    console.log(listId)
-    axios.delete(`/api/${this.props.user._id}/lists/${listId}`)
-      .then(res => {
-        console.log('success!')
-      })
+  handleInputChange(e) {
+    this.setState({
+      [e.target.name]: e.target.value
+    })
   }
 
-  componentDidMount() {
+  handleNameUpdate(e) {
+    e.preventDefault();
+    let listName = this.state.listName;
+    let listId = e.target.listId.value;
+    axios.post('/api/lists/', {
+      listName,
+      listId
+    }).then(res => {
+      this.getLists();
+    })
+  }
+
+  getLists() {
     axios.defaults.headers.common['Authorization'] = `Bearer ${this.props.token}`
     axios.get('/api/lists')
       .then(res => {
@@ -45,11 +58,23 @@ class Profile extends React.Component {
     axios.get(`/api/users/${this.props.user._id}`)
       .then(res => {
         let userLists = res.data.lists
-        console.log(userLists)
         this.setState({
           userLists
         })
       })
+  }
+
+  deleteList(e) {
+    let listId = e.target.value
+    console.log(listId)
+    axios.delete(`/api/${this.props.user._id}/lists/${listId}`)
+      .then(res => {
+        this.getLists()
+      })
+  }
+
+  componentDidMount() {
+    this.getLists()
   }
 
   render() {
@@ -60,7 +85,7 @@ class Profile extends React.Component {
         <nav>
           <Link to='/' >Adventures</Link>{' '}{' '}
           <Link to='/create' >Create an Adventure</Link>{' '}{' '}
-          <Link to='/myadventures' >My Adventures</Link>
+          <Link to='/myadventures' >Manage My Adventures</Link>
         </nav>
         <Route exact path='/' 
           render={() => <AdventureList 
@@ -74,13 +99,16 @@ class Profile extends React.Component {
         <Route path='/create'
           render={() => <CreateAdventure 
             token={this.props.token} 
-            user={this.props.user} />}
+            user={this.props.user} 
+            getLists={this.getLists} />}
         />
         <Route path='/myadventures'
           render={() => <AdventureList 
             lists={this.state.userLists} 
             user={this.props.user} 
-            listDelete={this.listDelete} />} 
+            deleteList={this.deleteList}
+            handleInputChange={this.handleInputChange}
+            handleNameUpdate={this.handleNameUpdate} />} 
         />
       </>
     )

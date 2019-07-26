@@ -13,7 +13,7 @@ const ImageUploader = (props) => {
         <i className="fas fa-camera-retro" />
       </label>
       <input type='file' id='single' name='myFile' /> 
-      <input type="submit" value="Add adventure" />
+      <input type="submit" value="Add Picture" />
     </form>
   } else {
     clickme = <img src={props.pictureUrl} alt="target"/>
