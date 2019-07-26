@@ -15,10 +15,10 @@ class Adventure extends React.Component {
 			pictureUrl: '',
 			listIndex: 1
 		}
-		this.handleButtonClick = this.handleButtonClick.bind(this)
+		this.handleLocationChange = this.handleLocationChange.bind(this)
 	} 
 
-	handleButtonClick(e) {
+	handleLocationChange(e) {
 		e.preventDefault();
 		let listIndex = parseInt(this.state.listIndex);
 		let listArr = this.state.locations
@@ -61,10 +61,9 @@ class Adventure extends React.Component {
 	render () {
 		return (
 			<>
-				<h1>This is a test. </h1> 
-				<Map lng={this.state.locLong} lat={this.state.locLat} listId={this.props.listId} />
 				<img src={this.state.pictureUrl} alt='goal' />
-				<button onClick={this.handleButtonClick} >I'm a button</button>
+				<Map lng={this.state.locLong} lat={this.state.locLat} listId={this.props.listId} />
+				<button onClick={this.handleLocationChange} >Next Location</button>
 			</>
 		)	
 	}

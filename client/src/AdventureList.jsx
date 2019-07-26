@@ -10,7 +10,12 @@ const AdventureList = (props) => {
         {props.lists.map( (list, index) => 
           <div key={index}>
             <h3>{list.name}</h3>
-            <button onClick={props.listDelete} value={list._id} >Delete</button>
+            <form onSubmit={(e) => props.handleNameUpdate(e)} >
+              <input type="text" name="listName" onChange={(e) => props.handleInputChange(e)} />
+              <input type="submit" value="Rename List" />
+              <input hidden type="text" name="listId" readOnly value={list._id} />
+            </form>
+            <button onClick={props.deleteList} value={list._id} >Delete</button>
           </div>
         )}
       </div>

@@ -36,6 +36,19 @@ router.get('/users/:id', (req, res) => {
   })
 })
 
+// update a list name
+router.post('/lists', (req, res) => {
+  let id = req.body.listId
+  List.findOneAndUpdate({_id: id}, {
+    name: req.body.listName,
+  }, {
+    new: true
+  }, (err, list) => {
+    if (err) res.json(err)
+    res.json(list)
+  });
+})
+
 // post a list
 router.post('/:id/lists', (req, res) => {
   User.findById(req.params.id, (err, user) => {
