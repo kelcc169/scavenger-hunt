@@ -48,3 +48,5 @@ class MapMarker extends React.Component {
 }
 
 export default MapMarker;
+
+    // <i class="fas fa-crosshairs"></i>
