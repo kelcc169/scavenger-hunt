@@ -56,17 +56,17 @@ db.on('error', (err) => {
 // app.use('/auth/login', loginLimiter);
 // app.use('/auth/signup', signupLimiter);
 
-app.post('/imageupload', parser.single('myFile'), (req, res) => {
-  // const image = {};
-  // image.url = req.file.url;
-  // image.id = req.file.public_id;
-  console.log(req);
-  
+app.post('/imageupload', upload.single('myFile'), (req, res) => {
+  cloudinary.uploader.upload(req.file.path, function (result) {
+    res.json(result.secure_url)
+  })
 })
 
 app.use('/auth', require('./routes/auth'));
-app.use('/api', expressJWT({secret: process.env.JWT_SECRET}), require('./routes/api'));
+app.use('/api', require('./routes/api'));
 
 app.listen(process.env.PORT, () => {
   console.log(`You're listening to port ${process.env.PORT}...`)
 });
+
+// expressJWT({secret: process.env.JWT_SECRET}),

@@ -12,14 +12,6 @@ router.get('/lists', (req, res) => {
   })
 })
 
-// get all the locations
-router.get('/locations', (req, res) => {
-  Location.find({}, (err, locations) => {
-    if (err) res.json(err)
-    res.json(locations)
-  })
-})
-
 // get one list from the api and all associated locations
 router.get('/lists/:id', (req, res) => {
   List.findById(req.params.id).populate('locations').exec( (err, list) => {

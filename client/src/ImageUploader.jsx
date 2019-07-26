@@ -1,31 +1,26 @@
-import React from 'react'
+import React from 'react';
 
-const ImageUploader = (props) => {
-  let clickme;
-  if (props.pictureUrl === '') {
-    clickme = 
-    <form id='photo-upload'
-      encType='multipart/form-data'
-      method='POST'
-      action='/imageupload'
-      className='button'>
-      <label htmlFor='single'>
-        <i className="fas fa-camera-retro" />
-      </label>
-      <input type='file' id='single' name='myFile' /> 
-      <input type="submit" value="Add Picture" />
-    </form>
-  } else {
-    clickme = <img src={props.pictureUrl} alt="target"/>
+class ImageUploader extends React.Component {
+  render() {
+    let clickme;
+    if (this.props.pictureUrl === '') {
+      clickme = 
+      <form onSubmit={this.props.onFormSubmit}>
+        <input type='file' id='single' name='myFile' onChange={this.props.onChange} /> 
+        <button type="submit">Add Picture</button>
+      </form>
+    } else {
+      clickme = <img src={this.props.pictureUrl} alt="target"/>
+    }
+
+    return (
+      <>
+        <div className="upload" >
+          {clickme}
+        </div>
+      </>
+    )
   }
-
-  return (
-    <>
-      <div className="upload" >
-        {clickme}
-      </div>
-    </>
-  )
 }
 
 export default ImageUploader;

@@ -34,9 +34,7 @@ class Adventure extends React.Component {
 		} else {
 			// you win!
 			this.setState({
-				locLat: listArr[0].latitude,
-				locLong: listArr[0].longitude,
-				pictureUrl: listArr[0].pictureUrl,
+				pictureUrl: 'https://res.cloudinary.com/dvrplexuy/image/upload/a_270/v1564120639/youdidit_u2l3sv.jpg',
 				listIndex: 1
 			})
 		}
@@ -62,8 +60,8 @@ class Adventure extends React.Component {
 		return (
 			<>
 				<img src={this.state.pictureUrl} alt='goal' />
-				<Map lng={this.state.locLong} lat={this.state.locLat} listId={this.props.listId} />
-				<button onClick={this.handleLocationChange} >Next Location</button>
+				<button onClick={this.handleLocationChange} className="left-margin btn-success" >Next Location</button>
+				<Map lng={this.state.locLong} lat={this.state.locLat} />
 			</>
 		)	
 	}

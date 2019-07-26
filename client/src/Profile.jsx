@@ -82,11 +82,26 @@ class Profile extends React.Component {
 
     return(
       <>
-        <nav>
-          <Link to='/' >Adventures</Link>{' '}{' '}
-          <Link to='/create' >Create an Adventure</Link>{' '}{' '}
-          <Link to='/myadventures' >Manage My Adventures</Link>
-        </nav>
+        <div className="log">
+          <img className="image" src="https://res.cloudinary.com/ddxp1ymgb/image/upload/v1564100738/bl9cln3aqj6zwolwqspb.png"/>
+          <i style={{fontSize:"1.3em"}} class="fab fa-stripe-s">cavenger Hunt</i>
+        </div>
+        <div className="jumbotron">
+          <nav>
+            <div className="left-margin">
+              <i class="fas fa-atlas"/>
+              <Link style={{textDecoration:'none'}}to='/' >Adventures</Link>{' '}{' '}
+            </div>
+            <div className="left-margin">
+              <i class="fas fa-map-marked-alt"></i>
+              <Link style={{textDecoration:'none'}}to='/create' >Create</Link>{' '}{' '}
+            </div>
+            <div className="left-margin">
+              <i class="fas fa-street-view"></i>
+              <Link style={{textDecoration:'none'}} to='/myadventures' >Profile</Link>
+            </div>
+          </nav>
+        </div>
         <Route exact path='/' 
           render={() => <AdventureList 
             lists={lists} 
